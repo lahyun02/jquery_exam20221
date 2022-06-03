@@ -14,26 +14,27 @@
 	$("#title3").css("color","red");
 	}); */
 	$(function() {
-		$(".title4").closest("div").css("color","red").css("border", "1px solid #0000ff");
-		
+		$("li:first-of-type").css("color","red").css("border", "1px solid #0000ff");
+		$("li:last-of-type").css("color","yellow").css("border", "1px solid #0000ff");
 	});
 	</script>
 </head>
 <body>
 	<h3 id="title">JQuery 이해</h3>
-	<div id="division">
-	<h3 id="title1">선택자1</h3>
-	<h3 id="title1-1">선택자2</h3>
-	<div id="division1">
-		<h4 id="title2">전체선택자</h4>
-		<div>
-			<h4 id="title3">아이디선택자</h4>
-			<h4 class="title4">클래스선택자</h4>
-		</div>
-	</div>
-	</div>
-
-
+	<ol id="index">
+		<li id="title1">선택자1</li>
+		<li id="title2">선택자2</li>
+		<li id="title3">전체선택자</li>
+		<li id="title4">아이디선택자</li>
+		<li id="title5">클래스선택자</li>
+	</ol>
+	<ul id="index1">
+		<li id="title6">선택자1</li>
+		<li id="title7">선택자2</li>
+		<li id="title8">전체선택자</li>
+		<li id="title9">아이디선택자</li>
+		<li id="title10">클래스선택자</li>
+	</ul>
 
 <P class="time">  The time on the server is ${serverTime}. </P>
 </body>
