@@ -14,27 +14,47 @@
 	$("#title3").css("color","red");
 	}); */
 	$(function() {
-		$("li:first-of-type").css("color","red").css("border", "1px solid #0000ff");
-		$("li:last-of-type").css("color","yellow").css("border", "1px solid #0000ff");
+		$("#index1 label:contains(사용자)").css({"border":"1px solid #0000ff"});
+		$("#form div:has(input)").css({"color":"green"}).css({"border":"1px solid #0000ff"});
+		$("#index select").contents().css({"color":"blue"}).css({"border":"1px solid #0000ff"});
+		$("#index4 li").not(":first").css({"color":"orange"}).css({"border":"1px dashed #0000ff"});
+
 	});
 	</script>
 </head>
 <body>
 	<h3 id="title">JQuery 이해</h3>
-	<ol id="index">
+	<form action="#" id="form">
+	<div id="index">
+		<select name="option-kind" id="option-kind">
+			<option value="opt1">선택1</option>
+			<option value="opt2">선택2</option>
+			<option value="opt3" selected>선택3</option>
+		</select>
+	</div>
+	<div id="index1">
+		<label for="id">사용자</label>
+		<input type="text" name="id" id="id" />
+		<label for="pass">비번</label>
+		<input type="text" name="pass" id="pass" />		
+	</div>
+	<div id="index2">
+		<input type="checkbox" name="chk1" value="체크1" />체크1
+		<input type="checkbox" name="chk2" value="체크2" checked />체크2
+	</div>
+	<div id="index3">
+		<input type="radio" name="rad1" value="선택1" checked />선택1
+		<input type="radio" name="rad2" value="선택2" />선택2
+	</div>
+	</form>
+	<ol id="index4">
 		<li id="title1">선택자1</li>
 		<li id="title2">선택자2</li>
 		<li id="title3">전체선택자</li>
 		<li id="title4">아이디선택자</li>
-		<li id="title5">클래스선택자</li>
+		<li class="title5">클래스선택자</li>
 	</ol>
-	<ul id="index1">
-		<li id="title6">선택자1</li>
-		<li id="title7">선택자2</li>
-		<li id="title8">전체선택자</li>
-		<li id="title9">아이디선택자</li>
-		<li id="title10">클래스선택자</li>
-	</ul>
+
 
 <P class="time">  The time on the server is ${serverTime}. </P>
 </body>

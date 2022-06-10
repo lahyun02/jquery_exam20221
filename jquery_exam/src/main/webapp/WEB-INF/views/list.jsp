@@ -11,8 +11,12 @@
 <script src="../resources/jquery.js"></script>
 <script>
 	$(function() {
-		$("#title td:first-of-type").css("color","red");
-		$("tr:first-of-type").css("color","blue");
+		
+		$("#title td:contains(김상범)").css({"color":"red"});
+		$("#title:has(td)").css({"color":"yellow"});
+		$("#tr1").contents().css({"color":"blue"});
+		$("#titlebody tr").not(":first").css({"color":"orange"});
+		$("#title td").not(":eq(2)").css({"color":"green"});
 	});
 </script>
 </head>
