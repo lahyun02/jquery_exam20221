@@ -42,7 +42,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "controller/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Locale locale, Model model) throws ParseException {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		

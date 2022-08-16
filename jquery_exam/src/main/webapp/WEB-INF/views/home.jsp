@@ -14,38 +14,32 @@
 	$("#title3").css("color","red");
 	}); */
 	$(function() {
-		var obj1 = $("#index1").children().clone();
-		$("#index2").remove();
-		$("#index3").empty();
-		$("#index3").append(obj1);
+		$("#id, #pass").on("focus", function(){
+			$(this).css("background-color", "red")
+		});
+		$("#id, #pass").on("blur", function(){
+			$(this).css("background-color", "blue")
+		});
+		$("#title").on("focusin", function(){
+			$(this).css("background-color", "red")
+		});
+		$("#title").on("focusout", function(){
+			$(this).css("background-color", "blue")
+		});
 		
 	});
 	</script>
 	
 </head>
 <body>
-	<h3 id="title">JQuery 이해</h3>
-	<div id="index1">
-	<section name="sec1" id="sec1">
-		<h3>선택1</h3>
-		<h3>선택2</h3>
-		<h3>선택3</h3> 
-	</section>
-	</div>
-	<div id="index2">
-		<section nam="sec2" id="sec2">
-			<h3>선택4</h3>
-			<h3>선택5</h3>
-			<h3>선택6</h3>
-		</section>
-	</div>
-	<div id="index3">
-		<section nam="sec3" id="sec3">
-			<h3>선택7</h3>
-			<h3>선택8</h3>
-			<h3>선택9</h3>
-		</section>
-	</div>
+	<div id="title">
+	<label for="btn1">사용자</label>
+	<button id="btn1">버턴 1</button>
+	<h3 id="content1">내용1</h3>
+	<label for="btn2">비 번</label>
+	<button id="btn2">버턴 2</button>
+	<h3 id="content2">내용2</h3>
+
 
 <P class="time">  The time on the server is ${serverTime}. </P>
 </body>

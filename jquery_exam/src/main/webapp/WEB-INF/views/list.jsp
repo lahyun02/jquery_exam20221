@@ -29,7 +29,23 @@
 		$("#btn1").click(function() {
 			$("#body").toggleClass("table table-bordered table-hover");
 		});
-			
+		
+		$("#title1").on("click", function(){
+			$(this).appendTo("#title2");
+		});
+		
+		$("#titlebody tr").on("click", function(){
+			var idx = $("#titlebody tr").index(this);
+			console.log(idx);
+			$("#titlebody tr").eq(idx).css("color", "red");
+	
+			var copyObj= $("#titlebody tr").eq(idx).html();
+			console.log(copyObj);
+			var tb = $("<table border=1 />");
+			var row = $("<tr />").append(copyObj);
+			tb.append(row);
+			$("#wrap").append(tb);
+		});
 	});
 </script>
 <style>
@@ -71,6 +87,8 @@
 
 </table>
 <button id="btn1">버튼 1</button> 
+
+<div id="wrap"></div>
 
 </body>
 </html>
