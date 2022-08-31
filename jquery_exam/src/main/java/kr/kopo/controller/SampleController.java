@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.kopo.domain.ProfessorVO;
 import kr.kopo.domain.SampleVO;
+import kr.kopo.domain.StudentVO;
 import kr.kopo.domain.Ticket;
 
 @RestController
@@ -150,9 +151,50 @@ public class SampleController {
 		vo.setCampus("폴리텍7");
 		list.add(vo);
 		
-		
 		return new ResponseEntity<>(list,HttpStatus.OK); 
+   }
+   
+   @GetMapping(value = "/getList2/{pid}")
+   public ResponseEntity<List<StudentVO>> getList2(@PathVariable("pid") long pid) throws ParseException{
 	   
+	   List<StudentVO> list = new ArrayList<StudentVO>();
+		StudentVO vo = new StudentVO();
+		
+		String from = "1992-05-29";
+		   Date to;
+		   SimpleDateFormat transForm = new SimpleDateFormat("yyyy-MM-dd");
+		   to = transForm.parse(from);
+		   vo.setSid(1);
+		   vo.setSname("학생1");
+		   vo.setDept("하이테크");
+		   vo.setBirth(to);
+		   vo.setSex("여성");
+		   vo.setPid(1);
+		   list.add(vo);
+		   
+		   from = "1996-03-28";
+		   to = transForm.parse(from);
+		   vo = new StudentVO();
+		   vo.setSid(2);
+		   vo.setSname("학생2");
+		   vo.setDept("하이테크");
+		   vo.setBirth(to);
+		   vo.setSex("여성");
+		   vo.setPid(2);
+		   list.add(vo);
+
+		   from = "1998-07-28";
+		   to = transForm.parse(from);
+		   vo = new StudentVO();
+		   vo.setSid(2);
+		   vo.setSname("학생3");
+		   vo.setDept("하이테크");
+		   vo.setBirth(to);
+		   vo.setSex("여성");
+		   vo.setPid(3);
+		   list.add(vo);
+		   
+		   return new ResponseEntity<>(list,HttpStatus.OK); 
    }
    
    
