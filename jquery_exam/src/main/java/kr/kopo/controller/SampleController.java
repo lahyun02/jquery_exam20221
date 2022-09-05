@@ -28,6 +28,8 @@ import kr.kopo.domain.Ticket;
 @RestController
 @RequestMapping("/sample")
 public class SampleController {
+	
+	
 
    @GetMapping(value="/getText", produces="text/plain; charset=UTF-8")
    public String getText() {
