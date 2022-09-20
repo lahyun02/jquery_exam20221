@@ -15,5 +15,5 @@ public interface StudentMapper {
 	
 	public int studentDelete(long sid);
 
-	public List<StudentVO> studentSelect(long sid);
+	public List<StudentVO> studentSelect(long pid);
 }

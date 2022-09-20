@@ -18,6 +18,8 @@
 </style>
 <script type="text/javascript">
 	$(function() { 		// --화면에 html을 다 뿌려준 후 그 다음에 리스너 발생시켜라는 함수. 
+		
+		
 		$.ajax({
 			url:"/sample/getList/111.json",
 			dataType: "JSON",
@@ -66,22 +68,27 @@
 				}
 			}
 		});
+	
+	
 		
 		
 		
-		$(".pidNo").on("click", function(e) {   // 여기서 사용되는 function()은 위의 $(function() {}와 다름. 
+//		$(".pidNo").on("click", function(e) {   // 여기서 사용되는 function()은 위의 $(function() {}와 다름. 
 			// 만약 이걸 위의 $(function() {} 밖으로 빼면, 아무것도 없는 상태에서 클릭이벤트를 발생시켜라는 의미가 되기 때문에 기능하지 못함. 
 			
 			//e.preventDefault(); --html에서 이벤트 작동x
 //			console.log(sid);
 //			alert("클릭이벤트 발생"); 
 
-			var pidNo = $(this).text();
+//----			var pidNo = $(this).text();
 //			alert(pidNo); 
-			
+
+		function getList(param) {
+			var pid=param.pid;
+
 			//학생테이블
 	 		$.ajax({
-	 			url:"/sample/getList1/" + pidNo + ".json",
+	 			url:"/sample/getList1/" + pid + ".json",
 	 			dataType: "JSON",
 	 			success: function(data) {
 	 				if(data.length > 0) {
@@ -127,7 +134,16 @@
 	 			}
 	 		});
 			
-			
+		}	//	
+		
+		$("tr").on("click", function(e){
+			//e.preventDefault();
+			$(".stu-wrap").empty();
+			var pidno = $(this).index();
+			console.log("1"+pidno);
+			pidno = $(".move").eq(pidno).text();
+			console.log("pidno"+pidno);
+			getList({pid:pidno});
 		});
 		
 	});
@@ -155,7 +171,7 @@
 	<tbody id="titlebody">
 		<c:forEach var="item" items="${list}">
 		<tr id="title" >
-			<td id="title1" class="pidNo">${item.pid}</td> 
+			<td id="title1" class="move pidNo">${item.pid}</td> 
 			<td>${item.pname}</td>
 			<td id="title2">${item.dept}</td>
 			<td>${item.post}</td>

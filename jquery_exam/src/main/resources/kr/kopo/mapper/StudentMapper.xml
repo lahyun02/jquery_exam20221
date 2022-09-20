@@ -41,9 +41,11 @@
 	</update>
 	
 	<select id="studentSelect" resultType="kr.kopo.domain.StudentVO">
+	<![CDATA[
 	select * 
 	from student
 	where pid = #{pid}
+	]]>
 	</select>
 	
 </mapper>

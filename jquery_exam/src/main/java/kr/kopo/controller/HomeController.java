@@ -130,6 +130,7 @@ public class HomeController {
 		return "list";
 	}
 	
+	// 테이블 클릭하면 해당 교수가 담당하는 학생 테이블 나타나게 하는 페이지
 	@GetMapping(value = "/getajax")
 	public String getajax(Model model) throws ParseException {
 		
