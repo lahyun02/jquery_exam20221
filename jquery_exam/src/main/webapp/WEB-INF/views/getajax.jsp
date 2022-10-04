@@ -10,6 +10,9 @@
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script src="../resources/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+
 <style>
 #container {
 	max-width: 80%;
@@ -68,7 +71,6 @@
 				}
 			}
 		});
-	
 	
 		
 		
@@ -146,6 +148,11 @@
 			getList({pid:pidno});
 		});
 		
+		$("#regBtn").on("click", function(){
+			self.location="add";
+		});
+		
+		
 	});
 	
 	
@@ -153,52 +160,74 @@
 
 </head>
 <body>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="container">
-<h1>교수리스트</h1>
-<table id="body" border = "1" class="table table-bordered">
-	<thead>
-		<tr id = "tr1" class="table">
-			<th id="th1" >교수번호</th>
-			<th>교수이름</th>
-			<th>학과</th>
-			<th>교수직위</th>
-			<th>연봉</th>
-			<th>임용일</th>
-			<th>전공</th>
-			<th id="th7">캠퍼스</th>
-		</tr>
-	</thead>
-	<tbody id="titlebody">
-		<c:forEach var="item" items="${list}">
-		<tr id="title" >
-			<td id="title1" class="move pidNo">${item.pid}</td> 
-			<td>${item.pname}</td>
-			<td id="title2">${item.dept}</td>
-			<td>${item.post}</td>
-			<td>${item.pay}</td>
-			<td><fmt:formatDate value="${item.hire}" pattern="yyyy-MM-dd"/></td>
-			<td>${item.major}</td>
-			<td id="title3">${item.campus}</td>
-		</tr>
-		</c:forEach>
-	</tbody>
+	<h1>교수리스트</h1>
+	<button id="regBtn" type="button" class="btn btn-primary btn-xs pull-right">등록</button>
+	<table id="body" border = "1" class="table table-bordered">
+		<thead>
+			<tr id = "tr1" class="table">
+				<th id="th1" >교수번호</th>
+				<th>교수이름</th>
+				<th>학과</th>
+				<th>교수직위</th>
+				<th>연봉</th>
+				<th>임용일</th>
+				<th>전공</th>
+				<th id="th7">캠퍼스</th>
+			</tr>
+		</thead>
+		<tbody id="titlebody">
+			<c:forEach var="item" items="${list}">
+			<tr id="title" >
+				<td id="p2" class="move pidNo">${item.pid}</td> 
+				<td id="title1"><a href="get?pid=${item.pid}">${item.pname}</a></td> 
+				<td id="title2">${item.dept}</td>
+				<td>${item.post}</td>
+				<td>${item.pay}</td>
+				<td><fmt:formatDate value="${item.hire}" pattern="yyyy-MM-dd"/></td>
+				<td>${item.major}</td>
+				<td id="title3">${item.campus}</td>
+			</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	
+	<!-- <button id="btn1">버튼 1</button>  -->
+	<div class="row">
+		<div class="col-lg-12">
+		<div class="panel panel-default">
+		<div class="panel-heading">교수리스트</div>
+		
+			<div class="panel-body wrap"></div>	
+		</div>
+		<div class="panel-heading">학생리스트</div>
+			<div class="panel-body stu-wrap"></div>	
+		</div>
+	</div>
 
-
-</table>
-<!-- <button id="btn1">버튼 1</button>  -->
-<div class="row">
-	<div class="col-lg-12">
-	<div class="panel panel-default">
-	<div class="panel-heading">교수리스트</div>
-		<div class="panel-body wrap"></div>	
-	</div>
-	<div class="panel-heading">학생리스트</div>
-		<div class="panel-body stu-wrap"></div>	
-	</div>
-	</div>
 </div>
 
-</div>
+
 
 </body>
 </html>

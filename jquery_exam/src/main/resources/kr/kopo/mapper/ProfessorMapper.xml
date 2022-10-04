@@ -15,15 +15,13 @@
 	<![CDATA[
 	insert into professor (pid,pname,dept,post,pay,hire,major,campus)
 	values
-	(#{pid},#{pname},#{dept},#{post},#{pay},#{hire,jdbcType=DATE},#{majo
-	r},#{campus})
+	(#{pid},#{pname},#{dept},#{post},#{pay},#{hire,jdbcType=DATE},#{major},#{campus})
 	]]>
 	</insert>
 
 	<select id="read" resultType="kr.kopo.domain.ProfessorVO">
 	<![CDATA[
-	select * from professor where pid =
-	#{pid}
+	select * from professor where pid =	#{pid}
 	]]>
 	</select>
 	
