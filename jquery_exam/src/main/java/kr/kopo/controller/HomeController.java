@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.sun.tools.sjavac.Log;
 
 import kr.kopo.domain.ProfessorVO;
 import kr.kopo.domain.StudentVO;
@@ -131,15 +134,6 @@ public class HomeController {
 		return "list";
 	}
 	
-	// 테이블 클릭하면 해당 교수가 담당하는 학생 테이블 나타나게 하는 페이지
-	@GetMapping(value = "/getajax")
-	public String getajax(Model model) throws ParseException {
-		
-			model.addAttribute( "list", service.list() );
-			
-			return "getajax";
-	}
-	
 	@GetMapping(value = "/getajax2")
 	public String getajax2(Model model) throws ParseException {
 		
@@ -184,15 +178,29 @@ public class HomeController {
 		return "getajax2";
 	}
 	
+	// 테이블 클릭하면 해당 교수가 담당하는 학생 테이블 나타나게 하는 페이지
+	@GetMapping(value = "/getajax")
+	public String getajax(Model model) throws ParseException {
+		
+			model.addAttribute( "list", service.list() );
+			
+			return "getajax";
+	}
+	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add() {
 		return "./add";
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(ProfessorVO item) {
+	public String add(ProfessorVO item, RedirectAttributes rttr) {
 		System.out.println(item.getPname()); 
-		service.register(item);
+		if(service.register(item)) {
+			rttr.addFlashAttribute("result", item.getPid());
+		}
+		
+//		service.register(item);
+		
 //		return "redirect:list";
 		return "redirect:getajax";
 	}
@@ -202,9 +210,35 @@ public class HomeController {
 		model.addAttribute("item", service.read(pid));
 		return "./get";
 	}
+	
+	// update?pid=111
+	@RequestMapping(value="/update", method = RequestMethod.GET)
+	public String update(@RequestParam("pid") long pid, Model model) {
+		model.addAttribute("item", service.read(pid));
+		return "./update"; 
+	}
 
+	@RequestMapping(value="/update", method = RequestMethod.POST)
+	public String update(ProfessorVO item, RedirectAttributes rttr) {
+//		log.info("update............");
+		System.out.println("update............");
+		if(service.update(item)) {
+			rttr.addFlashAttribute("result", "update_success");
+		}
+//		log.info("update1............");
+		System.out.println("update1............");
+//		return "redirect:list";
+		return "redirect:getajax";
+	}
 	
-	
+	@RequestMapping(value="/delete", method = RequestMethod.POST)
+	public String delete(@RequestParam("pid") long pid, RedirectAttributes rttr) {
+		if(service.delete(pid)) {
+			rttr.addFlashAttribute("result", "delete_success");
+		}
+//		return "redirect:list";
+		return "redirect:getajax";
+	}
 	
 	
 }

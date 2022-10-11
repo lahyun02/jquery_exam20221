@@ -20,8 +20,8 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
-	public void register(ProfessorVO item) {
-		mapper.insert(item); 
+	public boolean register(ProfessorVO item) {
+		return mapper.insert(item); 
 	}
 
 	@Override
@@ -30,13 +30,13 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
-	public void delete(long pid) {
-		mapper.delete(pid);
+	public boolean delete(long pid) {
+		return mapper.delete(pid)==true;
 	}
 
 	@Override
-	public void update(ProfessorVO item) {
-		mapper.update(item);
+	public boolean update(ProfessorVO item) {
+		return mapper.update(item)==true;
 	}
 	
 	

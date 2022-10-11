@@ -8,12 +8,12 @@ public interface ProfessorMapper {
 	
 	public List<ProfessorVO> list();
 	
-	public void insert(ProfessorVO item);
+	public boolean insert(ProfessorVO item);
 	
 	public ProfessorVO read(long sid);
 	
-	public int update(ProfessorVO item);
+	public boolean update(ProfessorVO item);
 	
-	public int delete(long sid);
+	public boolean delete(long sid);
 	
 }

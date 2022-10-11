@@ -7,11 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-<script src="../resources/jquery.js"></script>
+<!-- CSS only -->
+<!-- <script src="../resources/jquery.js"></script> -->
+<!-- 제이쿼리 버전이 안맞아서 모달창이 안 뜰 경우- 부트스트랩 이전에 제이쿼리가 먼저 와야 한다.(순서: 제이쿼리->부트스트랩 - 부트스트랩은 제이쿼리를 활용하기 때문) -->
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
 
 <style>
 #container {
@@ -22,6 +24,28 @@
 <script type="text/javascript">
 	$(function() { 		// --화면에 html을 다 뿌려준 후 그 다음에 리스너 발생시켜라는 함수. 
 		
+		function checkModal(result) {
+			if(result === '' || history.state) {
+				return;
+			}
+// 			if(result==="add_success" || history.state ){
+// 				$(".modal-body").html("추가되었습니다.");
+// 			}
+			if(result==="update_success" || history.state ){
+				$(".modal-body").html("수정되었습니다.");
+			}
+			if(result==="delete_success" || history.state ){
+				$(".modal-body").html("삭제되었습니다.");
+			}
+			
+			if(parseInt(result) > 0 ){
+				$(".modal-body").html("게시글 " + parseInt(result) + " 번이 등록되었습니다.");
+				console.log("inserted");
+			}
+			
+			$("#myModal").modal("show"); 
+		}
+	
 		
 		$.ajax({
 			url:"/sample/getList/111.json",
@@ -152,6 +176,11 @@
 			self.location="add";
 		});
 		
+		var result = "${result}";
+		console.log("result: " + result);
+		checkModal(result);
+		history.replaceState({}, null, null);
+		
 		
 	});
 	
@@ -162,11 +191,11 @@
 <body>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="myModalLabel">Modal title</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -228,6 +257,7 @@
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
 
 </body>
 </html>
