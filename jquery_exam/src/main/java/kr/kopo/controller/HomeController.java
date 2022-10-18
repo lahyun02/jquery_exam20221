@@ -222,6 +222,7 @@ public class HomeController {
 	public String update(ProfessorVO item, RedirectAttributes rttr) {
 //		log.info("update............");
 		System.out.println("update............");
+		System.out.println(item.getPid()); 
 		if(service.update(item)) {
 			rttr.addFlashAttribute("result", "update_success");
 		}

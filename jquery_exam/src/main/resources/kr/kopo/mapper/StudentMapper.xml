@@ -34,7 +34,7 @@
 	set sid= #{sid},
 	sname= #{sname},
 	dept = #{dept},
-	birth = #{birth},
+	birth = #{birth,jdbcType=DATE},
 	sex = #{sex},
 	pid = #{pid}
 	where sid =	#{sid}
@@ -46,6 +46,14 @@
 	from student
 	where pid = #{pid}
 	]]>
+	</select>
+	
+	<select id="getList" resultType="kr.kopo.domain.StudentVO">
+	select * from student where pid = #{pid}
+	</select>
+	
+	<select id="Listall" resultType="kr.kopo.domain.StudentVO">
+	select * from student
 	</select>
 	
 </mapper>

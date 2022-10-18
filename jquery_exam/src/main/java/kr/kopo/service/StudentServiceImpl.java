@@ -14,13 +14,13 @@ public class StudentServiceImpl implements StudentService {
 	private StudentMapper mapper;
 	
 	@Override
-	public List<StudentVO> studentList() {
-		return mapper.studentList();
+	public List<StudentVO> studentList(long pid) {
+		return mapper.getList(pid);
 	}
 
 	@Override
-	public void studentRegister(StudentVO item) {
-		mapper.studentInsert(item);
+	public int studentRegister(StudentVO item) {
+		return mapper.studentInsert(item);
 	}
 
 	@Override
@@ -29,18 +29,28 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void studentDelete(long sid) {
-		mapper.studentDelete(sid);
+	public int studentDelete(long sid) {
+		return mapper.studentDelete(sid);
 	}
 
 	@Override
-	public void studentUpdate(StudentVO item) {
-		mapper.studentUpdate(item);
+	public int studentUpdate(StudentVO item) {
+		return mapper.studentUpdate(item);
 	}
 
 	@Override
 	public List<StudentVO> studentSelect(long pid) {
 		return mapper.studentSelect(pid); 
+	}
+
+	@Override
+	public List<StudentVO> Listall() {
+		return mapper.Listall();
+	}
+
+	@Override
+	public List<StudentVO> getList(long pid) {
+		return mapper.getList(pid); 
 	}
 
 }

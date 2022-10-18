@@ -168,7 +168,7 @@ public class SampleController {
    public ResponseEntity<List<StudentVO>> getList1(@PathVariable("pid") long pid) throws ParseException{
 		
 	   // 지도교수에 따른 학생 데이터 불러오기 
-		return new ResponseEntity<>(studentService.studentSelect(pid), HttpStatus.OK); 
+		return new ResponseEntity<>(studentService.getList(pid), HttpStatus.OK); 
    }
    
    
