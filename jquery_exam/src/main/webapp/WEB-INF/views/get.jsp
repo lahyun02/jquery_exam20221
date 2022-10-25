@@ -29,8 +29,51 @@ $(function(){
 	var modalRegisterBtn = $("#modalRegisterBtn");
 	var modalCloseBtn = $("#modalCloseBtn"); 
 	
+	$("#addStudentBtn").on("click", function(e){
+		modal.find("input").not(":eq(5)").val("");
+		modalRegisterBtn.show();
+		$(".modal").modal("show");
+	});
+	
+	modalModBtn.on("click", function(e){
+		var vo = {
+				sid : modalSid.val(),
+				sname : modalSname.val(),
+				dept : modalDept.val(),
+				birth : modalBirth.val(),
+				sex : modalSex.val(),
+				pid : modalPid.val()
+		};
+		update(vo);
+		modal.modal("hide");
+		getList({pid: '${item.pid}'});  
+	})
+	
+	modalRemoveBtn.on("click", function(e){
+		remove(modalSid.val());
+		modal.modal("hide");
+		getList({pid: '${item.pid}'});  
+	})
+	
+	modalRegisterBtn.on("click", function(e){
+		var add = {
+				sid : modalSid.val(),
+				sname : modalSname.val(),
+				dept : modalDept.val(),
+				birth : modalBirth.val(),
+				sex : modalSex.val(),
+				pid : modalPid.val()
+		};
+		register(add);
+		//$(".wrap").empty();
+		modal.modal("hide");
+		getList({pid: '${item.pid}'});
+	})
+	
+	
 	$(".wrap").empty();
-	getList({pid: '${item.pid}'});   
+	getList({pid: '${item.pid}'});  
+	//교수번호에 해당하는 학생 데이터 목록 가져오기
 	function getList(param){
 		var pid = param.pid;
 		$.ajax({
@@ -57,10 +100,25 @@ $(function(){
 				}
 			}
 		});
-		
 	}
 	
+	//학생 데이터 등록하기
+	function register(vo){
+		$.ajax({
+			type: "post",
+			url: "reply/add",
+			data: JSON.stringify(vo),
+			contentType : "application/json;charset=utf-8",
+			success: function(result){
+				getList({pid:'${item.pid}'});
+				alert("RESULT:" + result);
+				modal.find("input").val("");
+				modal.modal("hide");
+			}
+		});
+	};
 	
+	//학생 상세정보 가져오기
 	function get(param){
 		var sid = param.sid;
 		$.ajax({
@@ -76,13 +134,45 @@ $(function(){
 				modalSex.val(vo.sex);
 				modalPid.val(vo.pid);
 				modal.modal("show");
+				modalRegisterBtn.hide();
 			}
 		});
+	};
+	
+	//학생정보 수정하기(모달창)
+	function update(vo){
+		$.ajax({
+			type: "put",
+			url: "reply/" + vo.sid,
+			data: JSON.stringify(vo),
+			contentType: "application/json;charset=utf-8",
+			success: function(result){
+				if(result === "success"){
+					getList({pid: '${item.pid}'});
+					alert("Modified"); 
+				}
+			}
+		})
+	}
+	
+	//학생정보 삭제하기(모달창)
+	function remove(sid){
+		$.ajax({
+			type : "delete",
+			url : "reply/" + sid,
+			success: function(deleteResult) {
+				if(deleteResult === "success") {
+					getList({pid : '${item.pid}'});
+					alert("REMOVED"); 
+				}
+			}
+		})
 	}
 	
 	
 	
 	//랜더링 후에 추가된 ajax테이블에 대한 이벤트 처리
+	//학생 목록의 각 행을 클릭하면 해당 학생의 상세정보 모달창 나옴.
 	$(".wrap").on("click", "tr", function(e){
 		var sidno = $(this).index();
 		
